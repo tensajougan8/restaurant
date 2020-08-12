@@ -7,6 +7,8 @@ use yii\db\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
+use yz\shoppingcart\CartPositionTrait;
+use yz\shoppingcart\CartPositionInterface;
 
 /**
  * This is the model class for table "menu".
@@ -21,11 +23,14 @@ use yii\behaviors\TimestampBehavior;
  * @property string $created_at
  * @property string $updated_at
  */
-class Menu extends \yii\db\ActiveRecord
+class Menu extends \yii\db\ActiveRecord implements CartPositionInterface
 {
     /**
      * {@inheritdoc}
      */
+
+     use CartPositionTrait;
+ 
     public static function tableName()
     {
         return 'menu';
@@ -63,5 +68,15 @@ class Menu extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

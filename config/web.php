@@ -26,6 +26,7 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+
         'i18n' => [
         'translations' => [
             'app' => [
@@ -65,6 +66,12 @@ $config = [
             //show full url (for example in case of a API)
             'absoluteUrl' => false,
         ],
+
+        'cart' => [
+            'class' => 'yz\shoppingcart\ShoppingCart',
+            'cartId' => 'my_application_cart',
+        ],
+    
         
         'urlManager' => [
             'enablePrettyUrl' => true,

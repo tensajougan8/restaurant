@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\helpers\Security;
+use yii\web\IdentityInterface;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "customer".
@@ -33,7 +37,7 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'phoneno', 'created_at'], 'required'],
+            [['name', 'address', 'phoneno'], 'required'],
             [['alernateno'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'landmark'], 'string', 'max' => 90],
@@ -53,11 +57,25 @@ class Customer extends \yii\db\ActiveRecord
             'name' => 'Name',
             'address' => 'Address',
             'landmark' => 'Landmark',
-            'phoneno' => 'Phoneno',
+            'phoneno' => 'Mobile No',
             'email_id' => 'Email ID',
-            'alernateno' => 'Alernateno',
+            'alernateno' => 'Alternate No',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                     'class' => \yii\behaviors\TimestampBehavior::className(),
+                     'attributes' => [
+                         ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
+                         ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                     ],
+                      'value' => new \yii\db\Expression('NOW()'),
+                 ],
+             ];
+         }
 }

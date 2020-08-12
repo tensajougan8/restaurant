@@ -143,6 +143,47 @@
 
 
     });
+
+     $('#order-form').on('submit', function () {
+            var data = $('#order-form').serialize();
+            if (!data){
+                alert('Enter your data, please');
+                return false;
+            }
+
+            $.ajax({
+                url: '/orders/customers',
+                type: 'POST',
+                data: data,
+                success: function(res){
+                    if (res === 'Success'){
+                        $('#contactModal .modal-title').text('Success!');
+                        $('#contactModal .modal-body').text('Reservation added');
+                        $('#contactModal').modal();
+
+                        $('#order-form')[0].reset();
+                    }
+                    else {
+                        var response_array=$.parseJSON(res);
+                        var errors = "";
+                        $.each(response_array,function (index, value) {
+                            errors += value+'\n';
+                        });
+                        $('#contactModal .modal-title').text('There are following errors:');
+                        $('#contactModal .modal-body').text(errors);
+                        $('#contactModal').modal();
+                    }
+
+                },
+                error: function(){
+                    $('#contactModal .modal-title').text('Error');
+                    $('#contactModal .modal-body').text('Server error. Please, try again later');
+                    $('#contactModal').modal();
+                }
+            });
+            return false;
+        });
+
     // scroll function
     function scrollToID(id, speed){
         var offSet = 0;

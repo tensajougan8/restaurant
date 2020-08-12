@@ -23,7 +23,9 @@
         "mihaildev/yii2-ckeditor": "*",
         "mihaildev/yii2-elfinder": "*",
         "noam148/yii2-image-resize" : "*",
-        "2amigos/yii2-date-picker-widget" : "~1.0"
+        "2amigos/yii2-date-picker-widget" : "~1.0",
+        "omnilight/yii2-shopping-cart": "*",
+        "yii2mod/yii2-cart": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -17,6 +17,8 @@ use app\models\SignupForm;
 use app\models\Special;
 use app\models\Staff;
 use yii\bootstrap\ActiveForm;
+use app\models\Customer;
+use yii\helpers\Json;
 
 class SiteController extends Controller
 {

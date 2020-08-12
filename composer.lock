@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa56f2e40140fb5ecd6e702f2df2a73d",
+    "content-hash": "3fa2b5ef9a34895afa3e8e70ff13e5b5",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -813,6 +813,44 @@
             "time": "2018-02-18T19:23:04+00:00"
         },
         {
+            "name": "omnilight/yii2-shopping-cart",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/omnilight/yii2-shopping-cart.git",
+                "reference": "afb9b29db3fc43871f4b57bfec34a9b2e8b73f8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/omnilight/yii2-shopping-cart/zipball/afb9b29db3fc43871f4b57bfec34a9b2e8b73f8c",
+                "reference": "afb9b29db3fc43871f4b57bfec34a9b2e8b73f8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yz\\shoppingcart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Pavel Agalecky",
+                    "email": "pavel.agalecky@gmail.com"
+                }
+            ],
+            "description": "Yii2 extension that adds shopping cart functions",
+            "keywords": [
+                "shopping cart",
+                "yii"
+            ],
+            "time": "2018-06-12T14:23:02+00:00"
+        },
+        {
             "name": "paragonie/random_compat",
             "version": "v9.99.99",
             "source": {
@@ -1408,6 +1446,51 @@
                 "yii2"
             ],
             "time": "2019-11-07T07:39:07+00:00"
+        },
+        {
+            "name": "yii2mod/yii2-cart",
+            "version": "1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2mod/yii2-cart.git",
+                "reference": "dc183b3f2bbc3f48ccaae0ecdfe193041786a736"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2mod/yii2-cart/zipball/dc183b3f2bbc3f48ccaae0ecdfe193041786a736",
+                "reference": "dc183b3f2bbc3f48ccaae0ecdfe193041786a736",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0",
+                "yiisoft/yii2": "~2.0.10"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.0",
+                "phpunit/phpunit": "^7.3"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2mod\\cart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Semenov",
+                    "email": "disemx@gmail.com"
+                },
+                {
+                    "name": "Igor Chepurnoi",
+                    "email": "chepurnoi.igor@gmail.com"
+                }
+            ],
+            "description": "Yii2 Shopping cart",
+            "time": "2018-08-20T20:01:03+00:00"
         },
         {
             "name": "yiisoft/yii2",

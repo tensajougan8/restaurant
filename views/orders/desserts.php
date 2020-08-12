@@ -25,7 +25,7 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="row">
-                 <?php foreach($breakfast as $breakfast):?>
+                 <?php foreach($desserts as $breakfast):?>
                 <div class="col-md-4">
                     <div class="food-item">
                         <h2><?= $breakfast->name ?></h2>
