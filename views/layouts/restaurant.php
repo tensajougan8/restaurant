@@ -119,9 +119,9 @@ CustomAsset::register($this);
                          </ul>
 
                          <div class="wow fadeInUp copyright-text" data-wow-delay="0.8s"> 
-                              <p><br>Copyright &copy; 2018 <br>Your Company Name 
+                              <p><br>Copyright &copy; 2018 <br>Vferns 
                               
-                              <br><br>Design: <a rel="nofollow" href="http://templatemo.com" target="_parent">TemplateMo</a></p>
+                              <br><br>Design: <a rel="nofollow" href="http://templatemo.com" target="_parent">Valdo</a></p>
                          </div>
                     </div>
                     

@@ -7,10 +7,12 @@ use yii\db\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
+
 /**
  * This is the model class for table "orders".
  *
  * @property int $id
+ * @property int $order_id
  * @property int $customer_id
  * @property int $item_id
  * @property int $quantity
@@ -20,6 +22,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property Customer $customer
  * @property Menu $item
+ * @property Orderid $order
  */
 class Orders extends \yii\db\ActiveRecord
 {
@@ -37,11 +40,12 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'item_id', 'quantity', 'status'], 'required'],
-            [['customer_id', 'item_id', 'quantity', 'status'], 'integer'],
+            [['order_id', 'customer_id', 'item_id', 'quantity', 'status'], 'required'],
+            [['order_id', 'customer_id', 'item_id', 'quantity', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['item_id' => 'id']],
+            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orderid::className(), 'targetAttribute' => ['order_id' => 'id']],
         ];
     }
 
@@ -52,6 +56,7 @@ class Orders extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'order_id' => 'Order ID',
             'customer_id' => 'Customer ID',
             'item_id' => 'Item ID',
             'quantity' => 'Quantity',
@@ -79,6 +84,16 @@ class Orders extends \yii\db\ActiveRecord
     public function getItem()
     {
         return $this->hasOne(Menu::className(), ['id' => 'item_id']);
+    }
+
+    /**
+     * Gets query for [[Order]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrder()
+    {
+        return $this->hasOne(Orderid::className(), ['id' => 'order_id']);
     }
 
     public function behaviors()

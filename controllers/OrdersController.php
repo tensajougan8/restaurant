@@ -12,6 +12,8 @@ use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\ShoppingCart;
 use app\models\Customer;
 use app\models\Orders;
+use app\models\OrdersId;
+use app\models\Loyalty;
 use yii\helpers\Json;
 
 class OrdersController extends Controller
@@ -141,6 +143,7 @@ class OrdersController extends Controller
 
 	 public function actionCustomers()
      {
+       
         $order = new Customer();
 
         if(\Yii::$app->request->isAjax){
@@ -161,7 +164,10 @@ class OrdersController extends Controller
                 if ($customer1->validate()){
                     $customer1->save();
                     $cus = Customer::find()->select(['id'])->where(['phoneno'=>$order2]);
-                    $res = $this->SaveOrder($cus);
+                     $this->addLoyalty($cus);
+                    $this->orderSave($cus);
+                    $this->SaveOrder($cus);
+                    
                     return ('Success');
                 } else {
                     return json_encode($customer1->errors);
@@ -178,7 +184,11 @@ class OrdersController extends Controller
                 if ($order->validate()){
                     $order->save();
                     $cus = Customer::find()->select(['id'])->where(['phoneno'=>$order2]);
+                  $re1 = $this->addLoyalty($cus);
+                  $re2 = $this->orderSave($cus);
                    $res = $this->SaveOrder($cus);
+
+                   
                     return ('Success');
                 } else {
                     return json_encode($order->errors);
@@ -236,12 +246,29 @@ class OrdersController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    public function orderSave($cus)
+    {
+        $model = new OrdersId;
+        
+         $model->customer_id = $cus;
+        $model->status = 1;
+      
+        $model->save(false);          
+               
+    }
+
     public function SaveOrder($cus)
     {
-    	$cart = Yii::$app->cart;
+    	      
+        $ids = OrdersId::find()
+        ->where(['customer_id' => $cus]) 
+        ->orderBy(['id' => SORT_DESC])
+        ->one();
+        $cart = Yii::$app->cart;
     	foreach($cart->getPositions() as $data)
     	{
     		$orders = new Orders;
+            $orders->order_id = $ids->id;
     		$orders->customer_id = $cus;
     		$orders->item_id = $data->id;
     		$orders->quantity = $data->quantity;
@@ -250,6 +277,35 @@ class OrdersController extends Controller
     		$orders->save(false); 
     		$cart->removeAll();
     	}
+    }
+
+    public function addLoyalty($cus)
+    {
+        $cart = Yii::$app->cart;
+        $total = \Yii::$app->cart->getCost();
+        $customer = Loyalty::find()
+               ->where(['customer_id' => $cus])
+               ->exists();
+               if($customer)
+               {
+                $pi = Loyalty::find()->where(['customer_id' => $cus])->one();
+                $p = $pi->points; 
+                $new = $total * 0.01;
+                $sum = $new + $p;
+                $point = Loyalty::find()->where(['customer_id'=>$cus])->one();
+                $point->points = $sum;
+                $point->validate();
+                $point->save(false);
+               }
+               else
+               {
+                
+                $new = $total * 0.01;
+                $point = new Loyalty;
+                $point->customer_id = $cus;
+                $point->points = $new;
+                $point->save(false);
+               }
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admins\models;
+namespace app\models;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -9,27 +9,24 @@ use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "orders".
+ * This is the model class for table "orderid".
  *
  * @property int $id
  * @property int $customer_id
- * @property int $item_id
- * @property int $quantity
  * @property int $status
  * @property string $created_at
- * @property string $updated_at
  *
  * @property Customer $customer
- * @property Menu $item
+ * @property Orders[] $orders
  */
-class Orders extends \yii\db\ActiveRecord
+class OrdersId extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'orders';
+        return 'orderid';
     }
 
     /**
@@ -38,11 +35,10 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'item_id', 'quantity', 'status', 'created_at', 'updated_at'], 'required'],
-            [['customer_id', 'item_id', 'quantity', 'status'], 'integer'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['customer_id', 'status'], 'required'],
+            [['customer_id', 'status'], 'integer'],
+            [['created_at'], 'safe'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['item_id' => 'id']],
         ];
     }
 
@@ -54,11 +50,8 @@ class Orders extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'customer_id' => 'Customer ID',
-            'item_id' => 'Item ID',
-            'quantity' => 'Quantity',
             'status' => 'Status',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
         ];
     }
 
@@ -73,23 +66,22 @@ class Orders extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Item]].
+     * Gets query for [[Orders]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getItem()
+    public function getOrders()
     {
-        return $this->hasOne(Menu::className(), ['id' => 'item_id']);
+        return $this->hasMany(Orders::className(), ['order_id' => 'id']);
     }
 
-     public function behaviors()
+    public function behaviors()
     {
         return [
             'timestamp' => [
                      'class' => \yii\behaviors\TimestampBehavior::className(),
                      'attributes' => [
                          ActiveRecord::EVENT_BEFORE_INSERT => ['created_at'],
-                         ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
                      ],
                       'value' => new \yii\db\Expression('NOW()'),
                  ],

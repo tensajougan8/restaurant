@@ -158,10 +158,10 @@
                 success: function(res){
                     if (res === 'Success'){
                         $('#contactModal .modal-title').text('Success!');
-                        $('#contactModal .modal-body').text('Reservation added');
+                        $('#contactModal .modal-body').text('Order has been placed');
                         $('#contactModal').modal();
-
-                        $('#order-form')[0].reset();
+                        setTimeout('go_to_you_page()', 3000);
+                         
                     }
                     else {
                         var response_array=$.parseJSON(res);
@@ -183,6 +183,11 @@
             });
             return false;
         });
+
+    function go_to_you_page()  
+    {  
+        window.location = 'breakfast';     
+    } 
 
     // scroll function
     function scrollToID(id, speed){

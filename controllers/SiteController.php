@@ -75,17 +75,17 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $breakfast = Special::find()
-            ->where([ 'type' => 'breakfast'])
+            ->where([ 'type' => 'breakfast', 'status'=> '1' ])
             ->orderBy(['id'=> SORT_DESC])
             ->one();
 
         $lunch = Special::find()
-            ->where(['type' => 'lunch'])
+            ->where(['type' => 'lunch', 'status'=> '1' ])
             ->orderBy(['id'=> SORT_DESC])
             ->one();
 
         $dinner = Special::find()
-            ->where(['type' => 'dinner'])
+            ->where(['type' => 'dinner', 'status'=> '1' ])
             ->orderBy(['id'=> SORT_DESC])
             ->one();
 

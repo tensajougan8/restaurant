@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admins\models\Menu */
+/* @var $model app\modules\admins\models\OrdersId */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menus', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Orders Ids', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="menu-view">
+<div class="orders-id-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,21 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'name',
-            'description',
-            'price',
-            'image',
-            'type',
-            [
-                'label' => 'Availablity',
-                'format' => 'html',
-                'attribute' => 'status',
-                'value' => function($data) {
-                    return ($data->status == 1)?('<span class="text-success">Available</span>'):('<span class="text-danger">Not Available</span>');
-                }
-            ],
+            'customer_id',
+            'status',
             'created_at',
-            'updated_at',
         ],
     ]) ?>
 

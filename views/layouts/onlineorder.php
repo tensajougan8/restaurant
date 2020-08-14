@@ -45,7 +45,6 @@ CustomAsset::register($this);
             <div id="main-nav" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="<?= \yii\helpers\Url::Home(); ?>" >Home</a></li>
-                    <li><a href="#featured-food">Our Menus</a></li>
                     <li><a href="breakfast">Breakfast</a></li>
                     <li><a href="lunch">Lunch</a></li>
                     <li><a href="dinner">Dinner</a></li>
@@ -121,9 +120,9 @@ CustomAsset::register($this);
                          </ul>
 
                          <div class="wow fadeInUp copyright-text" data-wow-delay="0.8s"> 
-                              <p><br>Copyright &copy; 2018 <br>Your Company Name 
+                              <p><br>Copyright &copy; 2018 <br>Vferns
                               
-                              <br><br>Design: <a rel="nofollow" href="http://templatemo.com" target="_parent">TemplateMo</a></p>
+                              <br><br>Design: <a rel="nofollow" href="http://templatemo.com" target="_parent">Valdo</a></p>
                          </div>
                     </div>
                     
